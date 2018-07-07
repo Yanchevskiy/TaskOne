@@ -6,13 +6,13 @@ Vue.component('icon', {
 })
 
 new Vue ({
-	el: ".app",
-	data: {
-		dataArr: [{id: 0, icon: "#icon-bars", title: "На рассмотрении", value: 12, color: "#70B7EB" },
-							{id: 1, icon: "#icon-pause", title: "Одобренный", value: 2, color: "#55B48A"},
-							{id: 2, icon: "#icon-eye", title: "Оплаченные", value: 7, color: "#4CBDCB"},
-							{id: 3, icon: "#icon-checkmark", title: "Приостановленные", value: 22, color: "#FBA842"},
-							{id: 4, icon: "#icon-trashcan", title: "Удаленные", value: 0, color: "#63B0DA"},
-							{id: 5, icon: "#icon-database", title: "График платежей", value: 5, color: "#70B7EB"}] 	
-	}
+  el: ".app",
+  data: {
+    dataArr: [{id: 0, icon: "#icon-bars", title: "На рассмотрении", value: 12, color: "#70B7EB" },
+              {id: 1, icon: "#icon-pause", title: "Одобренный", value: 2, color: "#55B48A"},
+              {id: 2, icon: "#icon-eye", title: "Оплаченные", value: 7, color: "#4CBDCB"},
+              {id: 3, icon: "#icon-checkmark", title: "Приостановленные", value: 22, color: "#FBA842"},
+              {id: 4, icon: "#icon-trashcan", title: "Удаленные", value: 0, color: "#63B0DA"},
+              {id: 5, icon: "#icon-database", title: "График платежей", value: 5, color: "#70B7EB"}]  
+  }
 });

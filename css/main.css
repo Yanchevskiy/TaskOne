@@ -1,7 +1,7 @@
 
 .app {
-	width: 30vw;
-	min-width: 210px;
+  width: 30vw;
+  min-width: 210px;
   margin: 0 auto;
   padding: 2%;
   font-size: 2rem;
@@ -10,26 +10,26 @@
 }
 
 .app__head {
-	margin-bottom: 5%;
-	font-size: 4rem;
+  margin-bottom: 5%;
+  font-size: 4rem;
 }
 
 .app li {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	margin-bottom: 5%;
-	font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5%;
+  font-size: 1.5rem;
 }
 
 .app svg {
-	width: 16px;
+  width: 16px;
   height: 16px;
-	overflow: visible;
+  overflow: visible;
 }
 
 .app p {
-	margin-left: 5%;
+  margin-left: 5%;
 }
 
 .counter__box {
@@ -39,5 +39,5 @@
 }
 
 .counter__box span {
-	color: white;
+  color: white;
 }
