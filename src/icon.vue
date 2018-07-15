@@ -1,13 +1,13 @@
 <template>
-  <li class="item__box">
-    <a href="#" class="icon__box">
+  <li class="item">
+    <div class="svg-box">
       <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink">
         <use :xlink:href=svgFullDir></use>
       </svg>
-    </a>
+    </div>
     <p>{{element.title}}</p>
-    <div class="counter__box" :style="{backgroundColor: element.color}"">
-      <span class="counter__value">{{element.value}}</span>
+    <div class="counter-box" :style="{backgroundColor: element.color}">
+      <span class="counter-box__value">{{element.value}}</span>
     </div>
   </li>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     svgFullDir: function () {
-      return 'src/assets/sprite.svg' + this.element.icon
+      return "src/assets/sprite.svg" + this.element.icon
     } 
   }
 }
@@ -30,8 +30,9 @@ export default {
 
 <style lang="sass">
   $white: #FFFFFF
+  $color-svg: #F1EBE4
 
-  .item__box 
+  .item 
     display: flex
     flex-wrap: wrap
     justify-content: flex-start
@@ -39,19 +40,29 @@ export default {
     margin-bottom: 5%
     font-size: calc( (100vw - 210px)/(1920 - 210) * (30 - 15) + 15px)
 
-    svg 
-      width: 16px
-      height: 16px
-      overflow: hidden
-
     p 
-      margin-left: 5%
+      padding-left: 5%
 
-    .counter__box 
-      border-radius: 5px
-      padding: 2%
-      margin-left: 5%
+  .counter-box 
+    border-radius: 5px
+    padding: 2%
+    margin-left: 5%
 
-      .counter__box span 
-        color: $white
+    .counter-box__value 
+      color: $white
+
+  .svg-box 
+    height: 0
+    width: 10%
+    padding-top: 10%
+    position: relative
+
+    svg 
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      fill: $color-svg
+
 </style>

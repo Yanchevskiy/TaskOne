@@ -1,17 +1,23 @@
 <template>
-  
+  <list></list>
 </template>
 
 <script>
+
+
 export default {
   data () {
     return {
       
     }
+  },
+  components: {
+    
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="sass">
+  
 
 </style>

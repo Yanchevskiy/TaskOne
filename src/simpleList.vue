@@ -1,41 +1,52 @@
 <template>
   <div class="app">
-  <object type="image/svg+xml" data="src/assets/sprite.svg" style="display: none;">
-  </object>
-    <h1 class="app__head">Разделы</h1>
-    <ul>  
+    <object type="image/svg+xml" data="src/assets/sprite.svg" v-show="false"></object>
+    <h1 class="app__head">Разделы</h1> 
+    <transition-group appear name="show" tag="ul">
       <icon 
-        v-for="item in dataArr"
+        v-for="item in items"
         :element="item"
         :key="item.id"
       ></icon>
-    </ul>
+    </transition-group>
   </div>    
 </template>
 
 <script>
 import iconItem from './icon.vue';
+import Firebase from 'firebase';
+
+let config = {
+  apiKey: "AIzaSyDhB4k_7SxZKZh22IuK484YStDaQOtVybM",
+  authDomain: "test-project-775bb.firebaseapp.com",
+  databaseURL: "https://test-project-775bb.firebaseio.com",
+  projectId: "test-project-775bb",
+  storageBucket: "test-project-775bb.appspot.com",
+  messagingSenderId: "749999676845"
+};
+
+let app = Firebase.initializeApp(config)
+let db = app.database()
+let dataItem = db.ref('dataArr')
 
 export default {
   data () {
     return {
-      dataArr: [{id: 0, icon: "#icon-bars", title: "На рассмотрении", value: 12, color: "#70B7EB" },
-                {id: 1, icon: "#icon-pause", title: "Одобренный", value: 2, color: "#55B48A"},
-                {id: 2, icon: "#icon-eye", title: "Оплаченные", value: 7, color: "#4CBDCB"},
-                {id: 3, icon: "#icon-checkmark", title: "Приостановленные", value: 22, color: "#FBA842"},
-                {id: 4, icon: "#icon-trashcan", title: "Удаленные", value: 0, color: "#63B0DA"},
-                {id: 5, icon: "#icon-database", title: "График платежей", value: 5, color: "#70B7EB"}]  
+      dataArr: []         
     }
   },
   components: {
     'icon': iconItem
+  },
+  firebase: {
+    items: dataItem
   }
 }
 </script>
 
 <style lang="sass">
-  $dark-grey: #424c52
-  $light-gray: #767F7E
+  $color-background: #424C52
+  $color-text-complimentary: #F1EBE4
   $white: #FFFFFF
 
   * 
@@ -65,8 +76,8 @@ export default {
     padding: 2%
     font-size: 2rem
     border-radius: 10px
-    background-color: $dark-grey
-    color: $light-gray
+    background-color: $color-background
+    color: $color-text-complimentary
 
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
@@ -75,4 +86,11 @@ export default {
     .app__head 
       margin-bottom: 5%
       font-size: calc( (100vw - 210px)/(1920 - 210) * (80 - 40) + 40px)
+
+  .show-enter-active, .show-leave-active 
+    transition: opacity .5s
+
+  .show-enter, .show-leave-to 
+    opacity: 0
+
 </style>
