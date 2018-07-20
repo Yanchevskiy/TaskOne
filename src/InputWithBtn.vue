@@ -11,20 +11,32 @@
 			<span class="mdl-textfield__error">Введите имя только буквами и без пробелов!</span>
 		</div>
 		
-		<div v-if="newNameText === ''" @click="addNewName" :style="{pointerEvents: 'none'}" class="add-button add-button_disabled">-DISABLED-</div> 
+		<div v-if="inputValid" @click="addNewName" :style="{pointerEvents: 'none'}" class="add-button add-button_disabled">-DISABLED-</div> 
 		<div v-else @click="addNewName" :style="{pointerEvents: 'auto'}" class="add-button">-ENABLED-</div>
-
 	</form>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
 	props: ["name"],
 	data () {
 		return {
 			newNameText: '',
 			newId: this.name.length + 1,
-			errors: []
+			errors: [],
+			serverArr: []
+		}
+	},
+	computed: {
+		inputValid: function() {
+			if(this.newNameText === "" || /\s/.test(this.newNameText) || /\d/.test(this.newNameText)) {
+				return true;
+			} 
+			else {
+				return false;
+			}
 		}
 	},
 	methods: {
@@ -34,33 +46,48 @@ export default {
 			if(this.newNameText === '') {
 				this.errors.push('Name required.');
 				return
-			}
+			};
 
 			this.errors = [];
 
 			this.name.push({
 				id: this.newId,
 				name: this.newNameText
-			})
-			this.newNameText = ''
-			this.newId = this.name.length + 1
-		},
-		inputValid: function() {
-			if(this.newNameText === '') {
-				return true
-			}
+			});
+
+			axios.post("https://test-project-775bb.firebaseio.com/inputData.json", {
+				id: this.newId,
+				name: this.newNameText
+			}) 
+			.then(response => console.log(response));
+
+			this.newNameText = '';
+			this.newId = this.name.length + 1;
 		}
+	},
+	mounted() {
+		axios
+			.get("https://test-project-775bb.firebaseio.com/inputData.json")
+			.then(response => {
+				this.serverArr = Object.values(response.data)
+				for (let i = 0; i < this.serverArr.length; i++) {
+					this.name.push(this.serverArr[i])
+				}
+				this.newId = this.serverArr.length + 1
+			})
+			.catch(error => console.log(error));     
 	}
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 	.login
 		margin-top: 2rem
 		display: flex
 		flex-wrap: wrap
 		align-items: center
-		width: 400px
+		width: 35vw
+		min-width: 400px
 
 	.login-err
 		width: 100%
@@ -75,7 +102,6 @@ export default {
 		display: flex
 		align-content: center
 		align-items: center
-		height: 50%
 		position: relative
 		cursor: pointer
 		font-size: 90%
@@ -104,7 +130,8 @@ export default {
 			background-blend-mode: multiply,multiply
 
 	.mdl-textfield
-		width: 73%
+		flex-grow: 1
+		width: auto
 
 	.mdl-layout 
 		align-items: center
@@ -121,6 +148,5 @@ export default {
 
 	.mdl-textfield__input
 		margin-bottom: 8px
-
 
 </style>

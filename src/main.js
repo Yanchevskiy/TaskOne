@@ -1,25 +1,18 @@
 import Vue from 'vue'
 
-import VueFire from 'vuefire'
-import simpleList from './simpleList.vue'
-Vue.use(VueFire)
+import BootstrapVue from "bootstrap-vue"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap-vue/dist/bootstrap-vue.css"
 
-// import BootstrapVue from "bootstrap-vue"
-// import NavPils from './NavPils.vue'
-// import InputWithBtn from './InputWithBtn.vue'
-// import "bootstrap/dist/css/bootstrap.min.css"
-// import "bootstrap-vue/dist/bootstrap-vue.css"
-// Vue.use(BootstrapVue)
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-// import VueMaterial from 'vue-material'
-// import 'vue-material/dist/vue-material.css'
-// Vue.use(VueMaterial)
+Vue.use(BootstrapVue, VueAxios, axios)
 
-
+import app from './App.vue'
 
 new Vue({
   el: '#app',
-  //render: h => h(NavPils)
-  render: h => h(simpleList)
+  render: h => h(app)
 })
 

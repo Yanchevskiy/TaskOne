@@ -1,10 +1,10 @@
 <template>
-  <div class="app">
+  <div class="app-list">
     <object type="image/svg+xml" data="src/assets/sprite.svg" v-show="false"></object>
     <h1 class="app__head">Разделы</h1> 
     <transition-group appear name="show" tag="ul">
       <icon 
-        v-for="item in items"
+        v-for="item in dataArr"
         :element="item"
         :key="item.id"
       ></icon>
@@ -14,37 +14,27 @@
 
 <script>
 import iconItem from './icon.vue';
-import Firebase from 'firebase';
-
-let config = {
-  apiKey: "AIzaSyDhB4k_7SxZKZh22IuK484YStDaQOtVybM",
-  authDomain: "test-project-775bb.firebaseapp.com",
-  databaseURL: "https://test-project-775bb.firebaseio.com",
-  projectId: "test-project-775bb",
-  storageBucket: "test-project-775bb.appspot.com",
-  messagingSenderId: "749999676845"
-};
-
-let app = Firebase.initializeApp(config)
-let db = app.database()
-let dataItem = db.ref('dataArr')
+import axios from 'axios';
 
 export default {
   data () {
     return {
-      dataArr: []         
+      dataArr: []        
     }
   },
   components: {
     'icon': iconItem
   },
-  firebase: {
-    items: dataItem
+  mounted() {
+    axios
+      .get("https://test-project-775bb.firebaseio.com/dataArr.json")
+      .then(response => this.dataArr = response.data)
+      .catch(error => console.log(error));     
   }
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   $color-background: #424C52
   $color-text-complimentary: #F1EBE4
   $white: #FFFFFF
@@ -69,12 +59,13 @@ export default {
   ol, ul 
     list-style: none
 
-  .app 
-    width: 30vw
-    min-width: 210px
-    margin: 0 auto
-    padding: 2%
-    font-size: 2rem
+  .app-list
+    width: 35vw 
+    min-width: 305px
+    margin: auto
+    display: flex
+    flex-wrap: wrap
+    padding-left: 2%
     border-radius: 10px
     background-color: $color-background
     color: $color-text-complimentary
@@ -84,9 +75,14 @@ export default {
     box-shadow: 0 10px 6px -6px #777;
 
     .app__head 
+      flex-basis: 100%
       margin-bottom: 5%
-      font-size: calc( (100vw - 210px)/(1920 - 210) * (80 - 40) + 40px)
+      font-size: calc( (100vw - 305px)/(1920 - 305) * (80 - 40) + 40px)
 
+    ul
+      display: flex
+      flex-wrap: wrap
+      
   .show-enter-active, .show-leave-active 
     transition: opacity .5s
 

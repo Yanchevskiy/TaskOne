@@ -1,6 +1,5 @@
 <template>
-	<div class="app">
-
+	<div class="app-pils">
 		<b-nav pills>
 			<input-btn :name="names"></input-btn>	
 			<b-nav-item 
@@ -13,7 +12,8 @@
 </template>
 
 <script>
-import inputbtn from './InputWithBtn.vue'
+import inputbtn from './InputWithBtn.vue';
+import axios from 'axios';
 
 export default { 
 	props: ["element"],
@@ -28,8 +28,8 @@ export default {
 }
 </script>
 
-<style lang="sass">
-	.app
+<style lang="sass" scoped>
+	.app-pils
 		display: flex
 		flex-direction: column
 		align-items: center
