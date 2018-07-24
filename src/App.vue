@@ -1,31 +1,22 @@
 <template>
-	<div class="global-wrap">
-		<list></list>
-		<pils></pils>
-	</div>
+  <div class="global-wrap">
+    <simpleList></simpleList>
+    <navPills></navPills>
+  </div>
 </template>
 
 <script>
-import simpleList from './simpleList.vue';
-import NavPils from './NavPils.vue';
+import simpleList from './simpleList.vue'
+import navPills from './navPills.vue'
 
 export default {
-  data () {
-    return {
-      
-    }
-  },
   components: {
-    'list': simpleList,
-    'pils': NavPils
+    'simpleList': simpleList,
+    'navPills': navPills
   }
 }
 </script>
 
-<style lang="sass">
-  
-  .global-wrap
-  	display: flex
-  	flex-direction: column
-
+<style lang="scss">
+  @import 'sass/main.sass'
 </style>

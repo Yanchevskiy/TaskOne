@@ -1,0 +1,39 @@
+.btn-wrap
+  display: flex
+  align-items: center
+  width: 100%
+
+.add-button
+  font-family: Roboto,sans-serif
+  font-size: 14px
+  font-weight: 300
+  padding: 6px 14px
+  color: #fff
+  background-color: #11c26d
+  border-color: #11c26d
+  box-shadow: none
+  white-space: normal
+  cursor: pointer
+  transition: border .2s linear,color .2s linear,width .2s linear,background-color .2s linear
+  text-align: center
+  vertical-align: middle
+  user-select: none
+  border: 1px solid transparent
+  border-radius: 3px
+  text-transform: none
+  flex-shrink: 0
+
+  &:hover:not(:active)
+    color: #fff
+    background-color: #28d17c
+    border-color: #28d17c
+    outline: 0
+    text-decoration: none
+
+  &:active
+    background-color: #05a85c
+    border-color: #05a85c
+
+.add-button_disabled
+  background-color: #eb6709
+  border-color: #eb6709
